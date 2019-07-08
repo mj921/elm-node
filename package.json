@@ -1,0 +1,43 @@
+{
+  "name": "elm-node",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon --harmony index.js",
+    "daily": "cross-env NODE_ENV=daily node --harmony index.js",
+    "start": "cross-env NODE_ENV=production pm2 start index.js",
+    "stop": "cross-env NODE_ENV=production pm2 stop index.js",
+    "checkcode": "node_modules/.bin/eslint --ignore-path .gitignore ./",
+    "hot-dev": "cross-env NODE_ENV=development nodemon --harmony index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "chalk": "^2.4.2",
+    "connect-history-api-fallback": "^1.6.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-session": "^1.16.2",
+    "express-winston": "^3.2.0",
+    "moment": "^2.24.0",
+    "morgan": "~1.9.1",
+    "mysql": "^2.17.1",
+    "qiniu": "^7.2.2",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^3.9.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
+    "@babel/runtime": "^7.4.5",
+    "babel-eslint": "^10.0.2",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "nodemon": "^1.19.1"
+  }
+}
