@@ -1,0 +1,5 @@
+export default {
+  SUCCESS: 20000,
+  SERVER_ERROR: 50000,
+  LOGIN_INVALIDATION: 50001
+};

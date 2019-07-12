@@ -1,7 +1,7 @@
 import express from "express";
 import CommonController from "../../controllers/CommonController";
 import paramsValid from "../../middlewares/paramsValid";
-import CommonParanValid from "../../paramsValids/CommonParanValid";
+import CommonParanValid from "../../paramsValids/CommonParamValid";
 
 const router = express.Router();
 const commonController = new CommonController();

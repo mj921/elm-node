@@ -16,10 +16,12 @@ export default class BaseService {
       exp = exp.replace(key, obj[key]);
     });
     exp = new RegExp(exp);
-    console.log(exp, date, exp.test(date));
     return exp.test(date);
   }
   validPhone(phone) {
     return /^1\d{10}$/.test(phone);
+  }
+  validPassword(password) {
+    return /^[0-9A-Za-z]{6,16}$/.test(password);
   }
 }

@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 08/07/2019 15:30:31
+ Date: 09/07/2019 16:03:10
 */
 
 SET NAMES utf8mb4;
@@ -33,10 +33,11 @@ CREATE TABLE `e_merchant`  (
   `start_distribution_fee` double(255, 0) NOT NULL COMMENT '起送费',
   `distribution_time` int(8) NULL DEFAULT 30 COMMENT '配送时间',
   `distance` int(8) NULL DEFAULT 1000 COMMENT '距离',
+  `audit_remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '审核备注',
   `addtime` datetime(0) NOT NULL,
   `modifytime` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `deleted` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`, `status`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -1,7 +1,7 @@
 import BaseModel from "./BaseModel";
 /** 商户 */
 export default class Merchant extends BaseModel {
-  constructor({ id = 0, name = "", phone = "", password = "", address = "", logo = "", distributionFee = 0, startDistributionFee = 0, distributionTime = 0, distance = 0, status = 1, addtime = "", modifytime = "" }) {
+  constructor({ id = 0, name = "", phone = "", password = "", address = "", logo = "", distributionFee = 0, startDistributionFee = 0, distributionTime = 0, distance = 0, status = 1, auditRemark = "", addtime = "", modifytime = "" }) {
     super();
     this.id = id;
     this.name = name;
@@ -15,6 +15,7 @@ export default class Merchant extends BaseModel {
     this.startDistributionFee = startDistributionFee;
     this.distributionTime = distributionTime;
     this.distance = distance;
+    this.auditRemark = auditRemark;
     this.status = status;
     this.addtime = addtime;
     this.modifytime = modifytime;
