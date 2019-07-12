@@ -1,7 +1,7 @@
 import BaseModel from "./BaseModel";
 /** 商户 */
 export default class Merchant extends BaseModel {
-  constructor({ id = 0, name = "", phone = "", password = "", address = "", logo = "", distributionFee = 0, startDistributionFee = 0, distributionTime = 0, distance = 0, status = 1, auditRemark = "", addtime = "", modifytime = "" }) {
+  constructor({ id = 0, name = "", phone = "", password = "", address = "", provinceId = 0, cityId = 0, areaId = 0, areaName = "", logo = "", distributionFee = 0, startDistributionFee = 0, distributionTime = 0, distance = 0, status = 1, auditRemark = "", addtime = "", modifytime = "" }) {
     super();
     this.id = id;
     this.name = name;
@@ -10,6 +10,10 @@ export default class Merchant extends BaseModel {
       this.password = password;
     }
     this.address = address;
+    this.provinceId = provinceId;
+    this.cityId = cityId;
+    this.areaId = areaId;
+    this.areaName = areaName;
     this.logo = logo;
     this.distributionFee = distributionFee;
     this.startDistributionFee = startDistributionFee;

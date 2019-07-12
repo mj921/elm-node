@@ -1,4 +1,3 @@
-import BaseService from "./BaseService";
 import ServiceError from "../lib/ServiceError";
 import MerchantDao from "../daos/MerchantDao";
 import Merchant from "../models/Merchant";
