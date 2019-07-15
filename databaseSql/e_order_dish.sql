@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 08/07/2019 15:30:26
+ Date: 15/07/2019 17:32:36
 */
 
 SET NAMES utf8mb4;
@@ -25,6 +25,7 @@ CREATE TABLE `e_order_dish`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL COMMENT '订单id',
   `dish_id` int(11) NOT NULL COMMENT '菜品id',
+  `merchant_id` int(11) NOT NULL COMMENT '商户id',
   `addtime` datetime(0) NOT NULL,
   `modifytime` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `deleted` tinyint(1) NOT NULL DEFAULT 0,

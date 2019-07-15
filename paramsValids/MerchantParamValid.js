@@ -60,5 +60,10 @@ export default {
     params: {
       id: [Number, "商户id", true]
     }
+  },
+  getMerchantTypes: {
+    query: {
+      id: [Number, "商户id", true]
+    }
   }
 };

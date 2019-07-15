@@ -2,14 +2,17 @@ import BaseModel from "./BaseModel";
 
 /** 菜品 */
 export default class Dish extends BaseModel {
-  constructor({ id = 0, name = "", price = 0, img = "", materials = [], status = 1, addtime = "", modifytime = "" }) {
+  constructor({ id = 0, merchantId = 0, name = "", price = 0, img = "", type = "", introduce = "", status = 1, monthSale = 0, addtime = "", modifytime = "" }) {
     super();
     this.id = id;
     this.name = name;
     this.price = price;
     this.img = img;
-    this.materials = materials;
+    this.merchantId = merchantId;
+    this.type = type;
+    this.introduce = introduce;
     this.status = status;
+    this.monthSale = monthSale;
     this.addtime = addtime;
     this.modifytime = modifytime;
     this.addtimeStr = this.dateFmt(addtime, "YYYY-MM-DD HH:mm:ss");
@@ -19,9 +22,9 @@ export default class Dish extends BaseModel {
   get _statusStr() {
     switch(this.status) {
       case Dish.STATUS.ENABLED:
-        return "启用";
+        return "上架";
       case Dish.STATUS.DISABLED:
-        return "禁用";
+        return "下架";
       default:
         return "未知状态";
     }
@@ -31,8 +34,8 @@ export default class Dish extends BaseModel {
 Dish.STATUS = {
   /** 全部 */
   ALL: BaseModel.ALL,
-  /** 启用 */
+  /** 上架 */
   ENABLED: 1,
-  /** 禁用 */
+  /** 下架 */
   DISABLED: 0
 };

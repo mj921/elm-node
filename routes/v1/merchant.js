@@ -15,6 +15,9 @@ router.post("/", checkLogin, paramsValid(MerchantParamValid.addMerchant), (req, 
 router.delete("/:id", checkLogin, paramsValid(MerchantParamValid.deletedMerchant), (req, res, next) => {
   merchantController.deleteMerchant(req, res, next);
 });
+router.get("/types", checkLogin, paramsValid(MerchantParamValid.getMerchantTypes), (req, res, next) => {
+  merchantController.getMerchantTypes(req, res, next);
+});
 router.get("/:id", checkLogin, paramsValid(MerchantParamValid.getMerchant), (req, res, next) => {
   merchantController.getMerchant(req, res, next);
 });
@@ -29,5 +32,8 @@ router.put("/audit", checkLogin, paramsValid(MerchantParamValid.auditMerchant), 
 });
 router.put("/status", checkLogin, paramsValid(MerchantParamValid.updateMerchantStatus), (req, res, next) => {
   merchantController.updateMerchantStatus(req, res, next);
+});
+router.get("/types", checkLogin, paramsValid(MerchantParamValid.getMerchantTypes), (req, res, next) => {
+  merchantController.getMerchantTypes(req, res, next);
 });
 export default router;

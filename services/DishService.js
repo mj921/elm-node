@@ -33,8 +33,6 @@ export default class DishService {
     if (!dish) {
       throw new ServiceError("该菜品不存在");
     }
-    const materials = await this.dishDao.getDishMaterialDetail(id);
-    dish.materials = materials;
     return new Dish(dish);
   }
   /** 新增菜品 */
@@ -46,9 +44,8 @@ export default class DishService {
     if (dish) {
       throw new ServiceError("菜品名称已存在");
     }
-    const materials = await this.materialDao.getMaterialByIds(dishModel.materials);
-    if (materials.length !== dishModel.materials.length) {
-      throw new ServiceError("素材不存在");
+    if (dishModel.introduce.length > 150) {
+      throw new ServiceError("菜品描述长度不能大于150");
     }
     const result = await this.dishDao.insterDish(dishModel);
     return result;
@@ -66,9 +63,8 @@ export default class DishService {
     if (dish1) {
       throw new ServiceError("菜品名称已存在");
     }
-    const materials = await this.materialDao.getMaterialByIds(dishModel.materials);
-    if (materials.length !== dishModel.materials.length) {
-      throw new ServiceError("素材不存在");
+    if (dish.introduce.length > 150) {
+      throw new ServiceError("菜品描述长度不能大于150");
     }
     const result = await this.dishDao.updateDish(dishModel);
     return result;
@@ -81,10 +77,6 @@ export default class DishService {
     }
     const result = await this.dishDao.deleteDish(id);
     return result;
-  }
-  /** 获取菜品素材 */
-  async getDishMaterials(id) {
-    return await this.dishDao.getDishMaterialDetail(id);
   }
   /** 修改菜品状态*/
   async updateDishStatus(id, status) {

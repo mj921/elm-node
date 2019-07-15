@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 08/07/2019 15:30:39
+ Date: 15/07/2019 14:41:14
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,8 @@ CREATE TABLE `e_dish`  (
   `price` decimal(10, 2) NOT NULL COMMENT '菜品价格',
   `type` varchar(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '菜品类别',
   `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '菜品图片',
-  `describe` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '菜品描述',
+  `introduce` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '菜品描述',
+  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '状态 0 下架 1 上架',
   `addtime` datetime(0) NOT NULL,
   `modifytime` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `deleted` tinyint(1) NOT NULL DEFAULT 0,

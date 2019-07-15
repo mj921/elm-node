@@ -1,42 +1,26 @@
 export default {
   /** 新增菜品 */
-  insertDish: "insert into dish(name, price, img, addtime, modifytime) values(?, ?, ?, now(), now())",
-  /** 新增菜品材料 */
-  insertDishMaterial: "insert into dish_material(dish_id, material_id, addtime, modifytime) values(?, ?, now(), now())",
+  insertDish: "insert into e_dish(merchant_id, name, price, img, type, introduce, addtime, modifytime) values(?, ?, ?, ?, ?, ?, now(), now())",
   /** 根据名称获取菜品 */
-  getDishByName: "select id, name, price, img, status, addtime, modifytime from dish where deleted = 0 and name = ?",
-  /** 根据名称获取菜品 */
-  getDishByNameAndId: "select id, name, price, img, status, addtime, modifytime from dish where deleted = 0 and name = ? and id != ?",
+  getDishByName: "select id, merchant_id merchantId, name, price, img, type, introduce, status, addtime, modifytime from e_dish where deleted = 0 and name = ?",
+  /** 根据名称id获取菜品 */
+  getDishByNameAndId: "select id, merchant_id merchantId, name, price, img, type, introduce, status, addtime, modifytime from e_dish where deleted = 0 and name = ? and id != ?",
   /** 获取菜品列表 */
-  getDishs: "select id, name, price, img, status, addtime, modifytime from dish where deleted = 0 and name like ? and (status = ? or true = ?) limit ?, ?",
+  getDishs: "select id, name, price, img, type, introduce, status, ifnull(month_sale, 0) monthSale, addtime, modifytime from e_dish left join (select dish_id, count(dish_id) month_sale from e_order_dish where merchant_id = ? group by dish_id) month_sale on e_dish.id = month_sale.dish_id where deleted = 0 and merchant_id = ? and name like ? and (status = ? or true = ?) limit ?, ?",
   /** 获取菜品列表 不分页*/
-  getDishAll: "select id, name, price, img, status, addtime, modifytime from dish where deleted = 0 and name like ? and (status = ? or true = ?)",
+  getDishAll: "select id, merchant_id merchantId, name, price, img, type, introduce, status, ifnull(month_sale, 0) monthSale, addtime, modifytime from e_dish left join (select dish_id, count(dish_id) month_sale from e_order_dish where merchant_id = ? group by dish_id) month_sale on e_dish.id = month_sale.dish_id where deleted = 0 and merchant_id = ? and name like ? and (status = ? or true = ?)",
   /** 获取菜品总数 */
-  getDishTotal: "select count(*) total from dish where deleted = 0 and name like ? and (status = ? or 1 = ?)",
+  getDishTotal: "select count(*) total from e_dish where deleted = 0 and merchant_id = ? and name like ? and (status = ? or 1 = ?)",
   /** 获取菜品 */
-  getDish: "select id, name, price, img, status, addtime, modifytime from dish where deleted = 0 and id = ?",
+  getDish: "select id, merchant_id merchantId, name, price, img, type, introduce, status, addtime, modifytime from e_dish where deleted = 0 and id = ?",
   /** 删除菜品 */
-  deleteDish: "update dish set deleted = 1 where id = ?",
+  deleteDish: "update e_dish set deleted = 1 where id = ?",
   /** 修改菜品 */
-  updateDish: "update dish set name = ?, price = ?, img = ? where id = ?",
+  updateDish: "update e_dish set name = ?, price = ?, img = ? where id = ?",
   /** 修改菜品状态 */
-  updateDishStatus: "update dish set status = ? where id = ?",
-  /** 获取菜品材料 */
-  getDishMaterials: "select id, dish_id dishId, material_id materialId from dish_material where deleted = 0 and dish_id = ?",
-  /** 获取菜品材料详情 */
-  getDishMaterialDetail: `SELECT
-                            dish_material.id,
-                            dish_material.dish_id dishId,
-                            material.id materialId,
-                            material.NAME materialName 
-                          FROM
-                            dish_material
-                            LEFT JOIN material ON dish_material.material_id = material.id 
-                          WHERE
-                            dish_material.deleted = 0 
-                            AND dish_material.dish_id = ?`,
-  /** 删除菜品材料 */
-  deleteDishMaterials: "update dish_material set deleted = 1 where dish_id = ? and deleted = 0",
+  updateDishStatus: "update e_dish set status = ? where id = ?",
   /** 根据id列表获取菜品列表 */
-  getDishByIds: "select id, name, price, img, status, addtime, modifytime from dish where deleted = 0 and id in (?)"
+  getDishByIds: "select id, name, price, img, status, addtime, modifytime from e_dish where deleted = 0 and id in (?)",
+  /** 获取商户所有类别 */
+  getDishTypesByMerchant: "select type from e_dish where merchant_id = ? group by type"
 };

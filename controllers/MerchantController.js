@@ -79,4 +79,13 @@ export default class MerchantController extends BaseController {
       next(err);
     });
   }
+  /** 获取商户所有菜品类别 */
+  getMerchantTypes(req, res, next) {
+    this.merchantService.getMerchantTypes(req.query.id)
+    .then(result => {
+      res.json(this.successJson(result));
+    }).catch(err => {
+      next(err);
+    });
+  }
 }

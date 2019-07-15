@@ -4,12 +4,14 @@ import ServiceError from "../lib/ServiceError";
 import Merchant from "../models/Merchant";
 import BaseService from "./BaseService";
 import AreaDao from "../daos/AreaDao";
+import DishDao from "../daos/DishDao";
 
 export default class MerchantService extends BaseService {
   constructor() {
     super();
     this.merchantDao = new MerchantDao();
     this.areaDao = new AreaDao();
+    this.dishDao = new DishDao();
   }
   /** 获取商户列表 */
   async getMerchants(query) {
@@ -118,5 +120,9 @@ export default class MerchantService extends BaseService {
   /** 修改商户状态*/
   async updateMerchantStatus(id, status) {
     return await this.merchantDao.updateMerchantStatus({ id, status, auditRemark: "" });
+  }
+  /** 获取商户所有菜品类别 */
+  async getMerchantTypes(id) {
+    return await this.dishDao.getDishTypesByMerchant(id);
   }
 }
