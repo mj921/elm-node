@@ -4,6 +4,7 @@ export default {
   getMerchants: {
     query: {
       name: [String, "商户名称", false, ""],
+      phone: [String, "商户手机号", false, ""],
       status: [Number, "商户状态", false, Merchant.STATUS.ALL]
     }
   },

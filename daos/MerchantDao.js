@@ -13,11 +13,11 @@ export default class MerchantDao extends BaseDao {
   }
   /** 获取商户列表 */
   async getMerchants(query) {
-    return await this.execSql(MerchantSql.getMerchants, ["%" + query.name + "%", query.status === Merchant.STATUS.ALL, query.status, (query.current - 1) * query.pageSize, query.current * query.pageSize]);
+    return await this.execSql(MerchantSql.getMerchants, ["%" + query.name + "%", query.phone === "", query.phone, query.status === Merchant.STATUS.ALL, query.status, (query.current - 1) * query.pageSize, query.current * query.pageSize]);
   }
   /** 获取商户总数 */
   async getMerchantTotal(query) {
-    const result = await this.execSql(MerchantSql.getMerchantTotal, ["%" + query.name + "%", query.status === Merchant.STATUS.ALL, query.status]);
+    const result = await this.execSql(MerchantSql.getMerchantTotal, ["%" + query.name + "%", query.phone === "", query.phone, query.status === Merchant.STATUS.ALL, query.status]);
     return result && result.length > 0 && result[0].total || 0;
   }
   /** 添加商户 */
