@@ -1,10 +1,11 @@
 import BaseModel from "./BaseModel";
 /** 用户 */
 export default class User extends BaseModel {
-  constructor({ id = 0, username = "", phone = "", password = "", status = 1, addtime = "", modifytime = "" }) {
+  constructor({ id = 0, username = "", phone = "", img = "", password = "", status = 1, addtime = "", modifytime = "" }) {
     super();
     this.id = id;
     this.username = username;
+    this.img = img;
     this.phone = phone;
     if (password) {
       this.password = password;
@@ -18,9 +19,9 @@ export default class User extends BaseModel {
   }
   get _statusStr() {
     switch(this.status) {
-      case Dish.STATUS.ENABLED:
+      case User.STATUS.ENABLED:
         return "正常";
-      case Dish.STATUS.DISABLED:
+      case User.STATUS.DISABLED:
         return "冻结";
       default:
         return "未知状态";
@@ -36,3 +37,4 @@ User.STATUS = {
   /** 冻结 */
   DISABLED: 0
 };
+User.DEFAULT_IMG = "http://ptse2w3v5.bkt.clouddn.com/default_header_img.jpg";

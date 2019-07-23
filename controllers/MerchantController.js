@@ -26,7 +26,6 @@ export default class MerchantController extends BaseController {
   }
   /** 获取商户 */
   getMerchant(req, res, next) {
-    console.log(req.session);
     this.merchantService.getMerchant(req.params.id)
     .then(result => {
       res.json(this.successJson(result));
@@ -82,6 +81,19 @@ export default class MerchantController extends BaseController {
   /** 获取商户所有菜品类别 */
   getMerchantTypes(req, res, next) {
     this.merchantService.getMerchantTypes(req.query.id)
+    .then(result => {
+      res.json(this.successJson(result));
+    }).catch(err => {
+      next(err);
+    });
+  }
+
+
+  // h5 接口
+
+  /** 搜索商户列表 */
+  searchMerchants(req, res, next) {
+    this.merchantService.searchMerchants({ ...req.query, status: req.query.status.split(",").map(item => +item) })
     .then(result => {
       res.json(this.successJson(result));
     }).catch(err => {

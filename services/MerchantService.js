@@ -125,4 +125,32 @@ export default class MerchantService extends BaseService {
   async getMerchantTypes(id) {
     return await this.dishDao.getDishTypesByMerchant(id);
   }
+
+  // h5接口
+
+  /** 搜索商户列表 */
+  async searchMerchants(query) {
+    console.log(query);
+    const list = await this.merchantDao.getMerchants(query);
+    const page = new Page({
+      current: query.current,
+      pageSize: query.pageSize
+    });
+    const total = await this.merchantDao.getMerchantTotal(query);
+    page.setTotal(total);
+    return {
+      list: list.map(item => new Merchant({
+        id: item.id,
+        name: item.name,
+        logo: item.logo,
+        score: item.score,
+        distributionFee: item.distributionFee,
+        startDistributionFee: item.startDistributionFee,
+        distributionTime: item.distributionTime,
+        distance: item.distance,
+        monthSale: item.monthSale
+      })),
+      page
+    };
+  }
 }

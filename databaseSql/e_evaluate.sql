@@ -11,24 +11,22 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 18/07/2019 11:13:08
+ Date: 18/07/2019 11:12:39
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for e_order_dish
+-- Table structure for e_evaluate
 -- ----------------------------
-DROP TABLE IF EXISTS `e_order_dish`;
-CREATE TABLE `e_order_dish`  (
+DROP TABLE IF EXISTS `e_evaluate`;
+CREATE TABLE `e_evaluate`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) NOT NULL COMMENT '订单id',
-  `dish_id` int(11) NOT NULL COMMENT '菜品id',
-  `merchant_id` int(11) NOT NULL COMMENT '商户id',
-  `num` int(11) NOT NULL DEFAULT 1 COMMENT '数量',
-  `price` decimal(10, 2) NOT NULL COMMENT '单价',
-  `finishtime` datetime(0) NOT NULL COMMENT '完成时间',
+  `merchant_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `score` int(11) NOT NULL DEFAULT 5 COMMENT '评价分数',
+  `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '评价内容',
   `addtime` datetime(0) NOT NULL,
   `modifytime` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `deleted` tinyint(1) NOT NULL DEFAULT 0,

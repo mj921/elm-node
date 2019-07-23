@@ -2,12 +2,10 @@ import DishDao from "../daos/DishDao";
 import Page from "../lib/Page";
 import ServiceError from "../lib/ServiceError";
 import Dish from "../models/Dish";
-import MaterialDao from "../daos/MaterialDao";
 
 export default class DishService {
   constructor() {
     this.dishDao = new DishDao();
-    this.materialDao = new MaterialDao();
   }
   /** 获取菜品列表 */
   async getDishs(query) {

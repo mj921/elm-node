@@ -15,6 +15,7 @@ export default {
     query: {
       merchantId: [Number, "商户id", true],
       name: [String, "菜品名称", false, ""],
+      type: [String, "菜品类型", false, ""],
       status: [Number, "菜品状态", false, Dish.STATUS.ALL]
     }
   },

@@ -1,7 +1,7 @@
 import express from "express";
-import DishController from "../../controllers/DishController";
-import DishParamValid from "../../paramsValids/DishParamValid";
-import paramsValid from "../../middlewares/paramsValid";
+import DishController from "../../../controllers/DishController";
+import DishParamValid from "../../../paramsValids/DishParamValid";
+import paramsValid from "../../../middlewares/paramsValid";
 
 const router = express.Router();
 const dishController = new DishController();

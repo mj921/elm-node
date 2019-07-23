@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 08/07/2019 15:30:44
+ Date: 18/07/2019 11:05:37
 */
 
 SET NAMES utf8mb4;
@@ -27,7 +27,9 @@ CREATE TABLE `e_address`  (
   `province` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '省',
   `city` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '市',
   `area` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '区',
+  `area_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '省市区名称',
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '详细地址',
+  `default_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否默认地址',
   `addtime` datetime(0) NOT NULL,
   `modifytime` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `deleted` tinyint(1) NOT NULL DEFAULT 0,

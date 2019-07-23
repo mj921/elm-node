@@ -26,7 +26,8 @@ export default class CommonController extends BaseController {
     this.commonService.manageLogin(req.body.username, req.body.password)
     .then(result => {
       const tokenData = {
-        username: req.body.username
+        username: req.body.username,
+        type: "manage"
       };
       if (result !== true) {
         tokenData.merchant = result;

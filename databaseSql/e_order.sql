@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 08/07/2019 15:30:20
+ Date: 18/07/2019 11:13:01
 */
 
 SET NAMES utf8mb4;
@@ -29,6 +29,7 @@ CREATE TABLE `e_order`  (
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户名',
   `phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户手机号',
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '地址',
+  `price` decimal(10, 2) NOT NULL COMMENT '总价',
   `status` tinyint(2) NOT NULL COMMENT '订单状态 0 待接单 1 已接单 2 配送中 3 已完成 -1 已取消',
   `addtime` datetime(0) NOT NULL COMMENT '下单时间',
   `modifytime` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),

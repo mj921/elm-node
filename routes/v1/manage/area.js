@@ -1,7 +1,7 @@
 import express from "express";
-import AreaController from "../../controllers/AreaController";
-import AreaParamValid from "../../paramsValids/AreaParamValid";
-import paramsValid from "../../middlewares/paramsValid";
+import AreaController from "../../../controllers/AreaController";
+import AreaParamValid from "../../../paramsValids/AreaParamValid";
+import paramsValid from "../../../middlewares/paramsValid";
 
 const router = express.Router();
 const areaController = new AreaController();

@@ -1,7 +1,7 @@
 import express from "express";
-import OrderController from "../../controllers/OrderController";
-import OrderParamValid from "../../paramsValids/OrderParamValid";
-import paramsValid from "../../middlewares/paramsValid";
+import OrderController from "../../../controllers/OrderController";
+import OrderParamValid from "../../../paramsValids/OrderParamValid";
+import paramsValid from "../../../middlewares/paramsValid";
 
 const router = express.Router();
 const orderController = new OrderController();

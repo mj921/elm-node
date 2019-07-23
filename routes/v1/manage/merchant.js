@@ -1,8 +1,8 @@
 import express from "express";
-import paramsValid from "../../middlewares/paramsValid";
-import MerchantParamValid from "../../paramsValids/MerchantParamValid";
-import MerchantController from "../../controllers/MerchantController";
-import checkLogin from "../../middlewares/checkLogin";
+import paramsValid from "../../../middlewares/paramsValid";
+import MerchantParamValid from "../../../paramsValids/MerchantParamValid";
+import MerchantController from "../../../controllers/MerchantController";
+import checkLogin from "../../../middlewares/checkLogin";
 
 const router = express.Router();
 const merchantController = new MerchantController();

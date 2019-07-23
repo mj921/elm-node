@@ -8,7 +8,9 @@ export default {
   /** 获取菜品列表 */
   getDishs: "select id, name, price, img, type, introduce, status, ifnull(month_sale, 0) monthSale, addtime, modifytime from e_dish left join (select dish_id, count(dish_id) month_sale from e_order_dish where merchant_id = ? group by dish_id) month_sale on e_dish.id = month_sale.dish_id where deleted = 0 and merchant_id = ? and name like ? and (status = ? or true = ?) limit ?, ?",
   /** 获取菜品列表 不分页*/
-  getDishAll: "select id, merchant_id merchantId, name, price, img, type, introduce, status, ifnull(month_sale, 0) monthSale, addtime, modifytime from e_dish left join (select dish_id, count(dish_id) month_sale from e_order_dish where merchant_id = ? group by dish_id) month_sale on e_dish.id = month_sale.dish_id where deleted = 0 and merchant_id = ? and name like ? and (status = ? or true = ?)",
+  getDishAll: `select id, merchant_id merchantId, name, price, img, type, introduce, status, ifnull(month_sale, 0) monthSale, addtime, modifytime 
+              from e_dish left join (select dish_id, count(dish_id) month_sale from e_order_dish where merchant_id = ? group by dish_id) month_sale on e_dish.id = month_sale.dish_id 
+              where deleted = 0 and merchant_id = ? and name like ? and (true = ? or type = ?) and (status = ? or true = ?)`,
   /** 获取菜品总数 */
   getDishTotal: "select count(*) total from e_dish where deleted = 0 and merchant_id = ? and name like ? and (status = ? or 1 = ?)",
   /** 获取菜品 */
@@ -16,7 +18,7 @@ export default {
   /** 删除菜品 */
   deleteDish: "update e_dish set deleted = 1 where id = ?",
   /** 修改菜品 */
-  updateDish: "update e_dish set name = ?, price = ?, img = ? where id = ?",
+  updateDish: "update e_dish set name = ?, price = ?, img = ?, type = ?, introduce = ? where id = ?",
   /** 修改菜品状态 */
   updateDishStatus: "update e_dish set status = ? where id = ?",
   /** 根据id列表获取菜品列表 */

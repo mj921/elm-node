@@ -1,11 +1,14 @@
 import Merchant from "../models/Merchant";
+import { EnumsPaging } from "../lib/enums";
 
 export default {
   getMerchants: {
     query: {
       name: [String, "商户名称", false, ""],
       phone: [String, "商户手机号", false, ""],
-      status: [Number, "商户状态", false, Merchant.STATUS.ALL]
+      status: [Number, "商户状态", false, Merchant.STATUS.ALL],
+      current: [Number, "当前页", false, EnumsPaging.current],
+      pageSize: [Number, "每页条数", false, EnumsPaging.pageSize]
     }
   },
   addMerchant: {
@@ -64,6 +67,16 @@ export default {
   getMerchantTypes: {
     query: {
       id: [Number, "商户id", true]
+    }
+  },
+
+  // h5
+  searchMerchants: {
+    query: {
+      name: [String, "商户名称", false, ""],
+      status: [String, "商户状态", false, Merchant.ALL_STATUS.join(",")],
+      current: [Number, "当前页", false, EnumsPaging.current],
+      pageSize: [Number, "每页条数", false, EnumsPaging.pageSize]
     }
   }
 };

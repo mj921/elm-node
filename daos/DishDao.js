@@ -9,7 +9,7 @@ export default class DishDao extends BaseDao {
   }
   /** 获取菜品列表 不分页 */
   async getDishAll(query) {
-    return await this.execSql(DishSql.getDishAll, [query.merchantId, query.merchantId, "%" + query.name + "%", query.status, query.status === Dish.STATUS.ALL]);
+    return await this.execSql(DishSql.getDishAll, [query.merchantId, query.merchantId, "%" + query.name + "%", query.type === "", query.type, query.status, query.status === Dish.STATUS.ALL]);
   }
   /** 获取菜品总数 */
   async getDishTotal(query) {
@@ -44,7 +44,7 @@ export default class DishDao extends BaseDao {
   }
   /** 更新菜品 */
   async updateDish(dish) {
-    const result = await this.execSql(DishSql.updateDish, [dish.merchantId, dish.name, dish.price, dish.img, dish.type, dish.introduce, dish.id]);
+    const result = await this.execSql(DishSql.updateDish, [dish.name, dish.price, dish.img, dish.type, dish.introduce, dish.id]);
     return result && result.affectedRows === 1;
   }
   /** 根据名称id获取菜品 */

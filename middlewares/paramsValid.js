@@ -77,7 +77,6 @@ const paramsConversion = (paramValid, params) => {
  * @
  */
 const paramsValid = params => (req, res, next) => {
-  console.log(params, req.query);
   try {
     if (params.query) {
       paramsConversion(params.query, req.query);
