@@ -65,15 +65,6 @@ export default class MerchantService extends BaseService {
     if (!this.validPassword(merchantModel.password)) {
       throw new ServiceError("密码格式不正确");
     }
-    if (!merchantModel.provinceId || merchantModel.provinceId < 1) {
-      throw new ServiceError("省不能为空");
-    }
-    if (!merchantModel.cityId || merchantModel.cityId < 1) {
-      throw new ServiceError("市不能为空");
-    }
-    if (!merchantModel.areaId || merchantModel.areaId < 1) {
-      throw new ServiceError("区不能为空");
-    }
     return true;
   }
   /** 新增商户 */
@@ -95,12 +86,6 @@ export default class MerchantService extends BaseService {
       throw new ServiceError("该商户不存在");
     }
     await this.validMerchant(merchantModel, "modify");
-    const areaIds = [merchantModel.provinceId, merchantModel.cityId, merchantModel.areaId].filter(item => item && item > 0);
-    const areas = await this.areaDao.getAreasByIds(areaIds);
-    if (areaIds.length !== areas.length) {
-      throw new ServiceError("所选地区不存在");
-    }
-    merchantModel.areaName = areas.map(item => item.name).join(" ");
     const result = await this.merchantDao.updateMerchant(merchantModel);
     return result;
   }
@@ -130,7 +115,6 @@ export default class MerchantService extends BaseService {
 
   /** 搜索商户列表 */
   async searchMerchants(query) {
-    console.log(query);
     const list = await this.merchantDao.getMerchants(query);
     const page = new Page({
       current: query.current,

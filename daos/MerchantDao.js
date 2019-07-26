@@ -24,12 +24,12 @@ export default class MerchantDao extends BaseDao {
   }
   /** 添加商户 */
   async insertMerchant(merchantModel) {
-    const result = await this.execSql(MerchantSql.insertMerchant, [merchantModel.name, merchantModel.phone, merchantModel.password, merchantModel.address, merchantModel.provinceId, merchantModel.cityId, merchantModel.areaId, merchantModel.areaName, merchantModel.logo, merchantModel.distributionFee, merchantModel.startDistributionFee, merchantModel.distributionTime, merchantModel.distance]);
+    const result = await this.execSql(MerchantSql.insertMerchant, [merchantModel.name, merchantModel.phone, merchantModel.password, merchantModel.address, merchantModel.position, merchantModel.longitude, merchantModel.latitude, merchantModel.logo, merchantModel.distributionFee, merchantModel.startDistributionFee, merchantModel.distributionTime, merchantModel.distance]);
     return result.affectedRows === 1;
   }
   /** 修改商户 */
   async updateMerchant(merchantModel) {
-    const result = await this.execSql(MerchantSql.updateMerchant, [merchantModel.name, merchantModel.phone, merchantModel.password, merchantModel.address, merchantModel.provinceId, merchantModel.cityId, merchantModel.areaId, merchantModel.areaName, merchantModel.logo, merchantModel.distributionFee, merchantModel.startDistributionFee, merchantModel.distributionTime, merchantModel.distance, merchantModel.id]);
+    const result = await this.execSql(MerchantSql.updateMerchant, [merchantModel.name, merchantModel.phone, merchantModel.password, merchantModel.address, merchantModel.position, merchantModel.longitude, merchantModel.latitude, merchantModel.logo, merchantModel.distributionFee, merchantModel.startDistributionFee, merchantModel.distributionTime, merchantModel.distance, merchantModel.id]);
     return result.affectedRows === 1;
   }
   /** 根据名称查找商户 */
