@@ -6,7 +6,7 @@ import checkLogin from "../../../middlewares/checkLogin";
 
 const router = express.Router();
 const merchantController = new MerchantController();
-router.get("/", checkLogin, paramsValid(MerchantParamValid.searchMerchants), (req, res, next) => {
+router.get("/", paramsValid(MerchantParamValid.searchMerchants), (req, res, next) => {
   merchantController.searchMerchants(req, res, next);
 });
 router.get("/types", checkLogin, paramsValid(MerchantParamValid.getMerchantTypes), (req, res, next) => {

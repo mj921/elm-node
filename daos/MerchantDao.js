@@ -25,12 +25,12 @@ export default class MerchantDao extends BaseDao {
   /** 添加商户 */
   async insertMerchant(merchantModel) {
     const result = await this.execSql(MerchantSql.insertMerchant, [merchantModel.name, merchantModel.phone, merchantModel.password, merchantModel.address, merchantModel.position, merchantModel.longitude, merchantModel.latitude, merchantModel.logo, merchantModel.distributionFee, merchantModel.startDistributionFee, merchantModel.distributionTime, merchantModel.distance]);
-    return result.affectedRows === 1;
+    return result && result.affectedRows === 1;
   }
   /** 修改商户 */
   async updateMerchant(merchantModel) {
     const result = await this.execSql(MerchantSql.updateMerchant, [merchantModel.name, merchantModel.phone, merchantModel.password, merchantModel.address, merchantModel.position, merchantModel.longitude, merchantModel.latitude, merchantModel.logo, merchantModel.distributionFee, merchantModel.startDistributionFee, merchantModel.distributionTime, merchantModel.distance, merchantModel.id]);
-    return result.affectedRows === 1;
+    return result && result.affectedRows === 1;
   }
   /** 根据名称查找商户 */
   async getMerchantByName(name) {
@@ -45,7 +45,7 @@ export default class MerchantDao extends BaseDao {
   /** 删除商户 */
   async deleteMerchant(id) {
     const result = await this.execSql(MerchantSql.deleteMerchant, [id]);
-    return result.affectedRows === 1;
+    return result && result.affectedRows === 1;
   }
   /** 获取商户 */
   async getMerchant(id) {
@@ -55,6 +55,6 @@ export default class MerchantDao extends BaseDao {
   /** 修改商户状态备注 */
   async updateMerchantStatus(merchantModel) {
     const result = await this.execSql(MerchantSql.updateMerchantStatus, [merchantModel.status, merchantModel.auditRemark, merchantModel.id]);
-    return result.affectedRows === 1;
+    return result && result.affectedRows === 1;
   }
 }

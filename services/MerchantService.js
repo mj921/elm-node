@@ -4,14 +4,12 @@ import ServiceError from "../lib/ServiceError";
 import Merchant from "../models/Merchant";
 import BaseService from "./BaseService";
 import AreaDao from "../daos/AreaDao";
-import DishDao from "../daos/DishDao";
 
 export default class MerchantService extends BaseService {
   constructor() {
     super();
     this.merchantDao = new MerchantDao();
     this.areaDao = new AreaDao();
-    this.dishDao = new DishDao();
   }
   /** 获取商户列表 */
   async getMerchants(query) {
