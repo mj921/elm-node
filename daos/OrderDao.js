@@ -8,16 +8,12 @@ export default class OrderDao extends BaseDao {
     return await this.execSql(
       OrderSql.getOrders,
       [
+        query.userId === 0,
+        query.userId,
         "%" + query.phone + "%",
         "%" + query.username + "%",
         query.status === Order.STATUS.ALL,
         query.status,
-        query.type === Order.TYPE.ALL,
-        query.type,
-        !query.startDate,
-        query.startDate,
-        !query.endDate,
-        query.endDate,
         (query.current - 1) * query.pageSize,
         query.current * query.pageSize
       ]);
@@ -27,36 +23,30 @@ export default class OrderDao extends BaseDao {
     const result = await this.execSql(
       OrderSql.getOrderTotal,
       [
+        query.userId === 0,
+        query.userId,
         "%" + query.phone + "%",
         "%" + query.username + "%",
         query.status === Order.STATUS.ALL,
-        query.status,
-        query.type === Order.TYPE.ALL,
-        query.type,
-        !query.startDate,
-        query.startDate,
-        !query.endDate,
-        query.endDate,
-        (query.current - 1) * query.pageSize,
-        query.current * query.pageSize
+        query.status
       ]);
     return result[0].total;
   }
   /** 新增订单 */
-  async insterOrder(order) {
+  async insterOrder(orderModel) {
     let queue = [{
       sql: OrderSql.insertOrder,
-      options: [order.phone, order.username, order.tableNumber, order.address, order.date, order.type],
+      options: [orderModel.merchantId, orderModel.userId, orderModel.addressId, orderModel.phone, orderModel.username, orderModel.price, orderModel.address, orderModel.remark],
       callback: result => {
-        order.dishs.forEach((item, i) => {
+        orderModel.dishs.forEach((item, i) => {
           queue[i + 1].options[0] = result.insertId;
         });
       }
     }];
-    order.dishs.forEach(item => {
+    orderModel.dishs.forEach(dish => {
       queue.push({
         sql: OrderSql.insertOrderDish,
-        options: [0, item]
+        options: [0, dish.id, orderModel.merchantId, dish.num, dish.price]
       });
     });
     return await this.execSqlTransaction(queue);
@@ -83,18 +73,18 @@ export default class OrderDao extends BaseDao {
     return await this.execSqlTransaction(queue);
   }
   /** 更新订单 */
-  async updateOrder(order) {
+  async updateOrder(orderModel) {
     let queue = [{
       sql: OrderSql.updateOrder,
-      options: [order.phone, order.username, order.tableNumber, order.address, order.date, order.type, order.id]
+      options: [orderModel.phone, orderModel.username, orderModel.tableNumber, orderModel.address, orderModel.date, orderModel.type, orderModel.id]
     }, {
       sql: OrderSql.deleteOrderDishs,
-      options: [order.id]
+      options: [orderModel.id]
     }];
-    order.dishs.forEach(item => {
+    orderModel.dishs.forEach(item => {
       queue.push({
         sql: OrderSql.insertOrderDish,
-        options: [order.id, item]
+        options: [orderModel.id, item]
       });
     });
     return await this.execSqlTransaction(queue);

@@ -22,7 +22,7 @@ export default {
   /** 修改菜品状态 */
   updateDishStatus: "update e_dish set status = ? where id = ?",
   /** 根据id列表获取菜品列表 */
-  getDishByIds: "select id, name, price, img, status, addtime, modifytime from e_dish where deleted = 0 and id in (?)",
+  getDishByIds: "select id, name, price, img, type, introduce, status, addtime, modifytime from e_dish where deleted = 0 and merchant_id = ? and id in (?)",
   /** 获取商户所有类别 */
   getDishTypesByMerchant: "select type from e_dish where merchant_id = ? group by type"
 };

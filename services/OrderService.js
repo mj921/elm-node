@@ -3,6 +3,8 @@ import Page from "../lib/Page";
 import ServiceError from "../lib/ServiceError";
 import Order from "../models/Order";
 import DishDao from "../daos/DishDao";
+import MerchantDao from "../daos/MerchantDao";
+import AddressDao from "../daos/AddressDao";
 import BaseService from "./BaseService";
 
 export default class OrderService extends BaseService {
@@ -10,6 +12,8 @@ export default class OrderService extends BaseService {
     super();
     this.orderDao = new OrderDao();
     this.dishDao = new DishDao();
+    this.merchantDao = new MerchantDao();
+    this.addressDao = new AddressDao();
   }
   /** 获取订单列表 */
   async getOrders(query) {
@@ -46,12 +50,20 @@ export default class OrderService extends BaseService {
     if (orderModel.address.length > 100) {
       throw new ServiceError("订单地址长度不能大于100");
     }
-    if (!this.validDate(orderModel.date, "YYYY-MM-DD")) {
-      throw new ServiceError("订单日期格式不正确");
+    if (orderModel.remark.length > 50) {
+      throw new ServiceError("订单备注长度不能大于50");
     }
-    const dishs = await this.dishDao.getDishByIds(orderModel.dishs);
+    const address = await this.addressDao.getAddress(orderModel.addressId);
+    if (!address) {
+      throw new ServiceError("地址不存在");
+    }
+    const merchant = await this.merchantDao.getMerchant(orderModel.merchantId);
+    if (!merchant) {
+      throw new ServiceError("商户不存在");
+    }
+    const dishs = await this.dishDao.getDishByIds(orderModel.merchantId, orderModel.dishs.map(item => item.id));
     if (dishs.length !== orderModel.dishs.length) {
-      throw new ServiceError("菜品不存在");
+      throw new ServiceError("该商户菜品不存在");
     }
     const result = await this.orderDao.insterOrder(orderModel);
     return result;

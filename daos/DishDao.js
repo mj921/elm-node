@@ -58,8 +58,8 @@ export default class DishDao extends BaseDao {
     return result.affectedRows === 1;
   }
   /** 根据id列表获取菜品列表*/
-  async getDishByIds(ids) {
-    return await this.execSql(DishSql.getDishByIds, [ids]);
+  async getDishByIds(merchantId, ids) {
+    return await this.execSql(DishSql.getDishByIds, [merchantId, ids]);
   }
   /** 获取商户所有菜品类别 */
   async getDishTypesByMerchant(merchantId) {

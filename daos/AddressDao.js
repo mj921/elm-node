@@ -11,4 +11,8 @@ export default class AddressDao extends BaseDao {
   async getAddressByUser(userId) {
     return await this.execSql(AddressSql.getAddressByUser, [userId]);
   }
+  /** 获取地址 */
+  async getAddress(id) {
+    return await this.execSql(AddressSql.getAddressByUser, [id]);
+  }
 }

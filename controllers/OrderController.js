@@ -1,5 +1,6 @@
 import OrderService from "../services/OrderService";
 import BaseController from "./BaseController";
+import Token from "../lib/Token";
 
 export default class OrderController extends BaseController {
   constructor() {
@@ -8,6 +9,13 @@ export default class OrderController extends BaseController {
   }
   /** 获取订单列表 */
   getOrders(req, res, next) {
+    const queryModel = { ...req.query };
+    if (!req.body.userId) {
+      const result = Token.decrypt(req.headers.authorization);
+      if (result.data.type === "front") {
+        queryModel.userId = result.data.data.id;
+      }
+    }
     this.orderService.getOrders(req.query)
     .then(result => {
       res.json(this.successJson(result));
@@ -26,7 +34,14 @@ export default class OrderController extends BaseController {
   }
   /** 新增订单 */
   addOrder(req, res, next) {
-    this.orderService.addOrder(req.body)
+    const orderModel = { ...req.body };
+    if (!req.body.userId) {
+      const result = Token.decrypt(req.headers.authorization);
+      if (result.data.type === "front") {
+        orderModel.userId = result.data.data.id;
+      }
+    }
+    this.orderService.addOrder(orderModel)
     .then(result => {
       res.json(this.successJson(result, "新增订单成功"));
     }).catch(err => {
