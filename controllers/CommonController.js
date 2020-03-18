@@ -13,7 +13,7 @@ export default class CommonController extends BaseController {
     try {
       const mac = new qiniu.auth.digest.Mac(config.accessKey, config.secretKey);
       const options = {
-        scope: "mj921",
+        scope: "mj777",
       };
       const putPolicy = new qiniu.rs.PutPolicy(options);
       const uploadToken = putPolicy.uploadToken(mac);
